@@ -1,8 +1,11 @@
-#Login with sshpass
+						### This file contains commands and scripts that I have collected form veroius place ###
+
+                                                    Login with sshpass
 sshpass -p 'your_password' ssh user@host_ip
 
 
-#Show line number in nano for 'filename'
+                                          
+                                          Show line number in nano for 'filename'
 #Show while opening file
 nano -c [filename]
 #Show always
@@ -12,11 +15,13 @@ set const
 #save
 
 
-#Record your encryption passphrase in Ubuntu
+                                          
+                                          Record your encryption passphrase in Ubuntu
 ecryptfs-unwrap-passphrase
 
 
-#See USB information in Linux Terminal
+                                            
+                                            See USB information in Linux Terminal
 user@user-pc:~$ lsusb 
 // open terminal and type lsusb
 user@user-pc:~$ Bus #bus_number Device #device_number: ID #vendor:#product USB_Name 
@@ -25,7 +30,8 @@ user@user-pc:~$ lsusb -D /dev/bus/usb/#bus_number/#device_number
 //replace the #bus_number and #device_number of you expected device
 
 
-#Shell script to install application(s) in Ubuntu
+
+                                          Shell script to install application(s) in Ubuntu
 #method 01
 #!/bin/sh
 apt-get update  # To get the latest package lists
@@ -45,3 +51,16 @@ cat example.list | xargs sudo apt-get -y install
 #!/bin/bash
 apt-get update  # To get the latest package lists
 apt-get install $1 -y
+
+
+
+                                              Connect to wifi from terminal
+#List all the wifi
+nmcli dev wifi
+#connect to wifi
+nmcli dev wifi connect $SSID password $PASS
+
+
+
+                                              Get a spcecifice column form output
+command | awk '{print $n}' #n is the number of column
