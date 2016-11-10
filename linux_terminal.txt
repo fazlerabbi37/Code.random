@@ -1,0 +1,28 @@
+#Login with sshpass
+sshpass -p 'your_password' ssh user@host_ip
+
+
+#Show line number in nano for 'filename'
+#Show while opening file
+nano -c [filename]
+#Show always
+nano ~/.nanorc
+#don't worry if its empty - this file doesn't exist by default
+set const
+#save
+
+
+#Record your encryption passphrase in Ubuntu
+ecryptfs-unwrap-passphrase
+
+
+#See USB information in Linux Terminal
+user@user-pc:~$ lsusb 
+// open terminal and type lsusb
+user@user-pc:~$ Bus #bus_number Device #device_number: ID #vendor:#product USB_Name 
+//output of command 'lsusb' including your expected device
+user@user-pc:~$ lsusb -D /dev/bus/usb/#bus_number/#device_number 
+//replace the #bus_number and #device_number of you expected device
+
+
+#
