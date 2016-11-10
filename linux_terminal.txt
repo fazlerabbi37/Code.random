@@ -25,4 +25,23 @@ user@user-pc:~$ lsusb -D /dev/bus/usb/#bus_number/#device_number
 //replace the #bus_number and #device_number of you expected device
 
 
-#
+#Shell script to install application(s) in Ubuntu
+#method 01
+#!/bin/sh
+apt-get update  # To get the latest package lists
+apt-get install <package name> -y #apt-get install <package name> -y 
+#etc.
+
+#method 02
+#!/bin/sh
+LIST_OF_APPS="a b c d e"
+aptitude update
+aptitude install -y $LIST_OF_APPS
+
+#method 03
+cat example.list | xargs sudo apt-get -y install
+
+#method 04
+#!/bin/bash
+apt-get update  # To get the latest package lists
+apt-get install $1 -y
