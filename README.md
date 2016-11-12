@@ -1,3 +1,4 @@
 # Code.random
-repo for randome codes
-some of them (espacilly the unix ones are collected from various source)
+
+repo for random codes\n
+linux_terminal.txt is a collection from various source containing various terminal command 
