@@ -1,0 +1,3 @@
+
+::unrar command
+unrar x "path\to\file.rar" "path\to\be\exrtacted"
