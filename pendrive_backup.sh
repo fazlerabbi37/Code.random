@@ -29,7 +29,7 @@ DISPLAY=:0.0 /usr/bin/notify-send "10 seconds.."
 sleep 10
 
 #rsync with source and destination
-rsync -r $source $destination
+rsync -r --delete  $source $destination
 
 #show desktop notifications (confirmation)
 DISPLAY=:0.0 /usr/bin/notify-send "Pendrive Synced ✔"
