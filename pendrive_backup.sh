@@ -33,4 +33,3 @@ rsync -r --delete  $source $destination
 
 #show desktop notifications (confirmation)
 DISPLAY=:0.0 /usr/bin/notify-send "Pendrive Synced ✔"
-
