@@ -1,4 +1,4 @@
-//author: fr37 
+//author: fazlerabbi37
 //this wee little Java program takes a String and swaps the places of pairs
 import java.util.Scanner;
 public class number_pair_twist

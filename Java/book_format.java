@@ -1,4 +1,4 @@
-//author: fr37
+//author: fazlerabbi37
 //this is a program that will print a document with normal printer in such a way that they will be able to be bind as book
 //dedicated to S M Nafiur Rahman. The man who can pass his whole life without doing nothing but reading books.
 import java.util.Scanner;

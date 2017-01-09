@@ -1,4 +1,4 @@
-//author: fr37 
+//author: fazlerabbi37
 //this is a simple Java program to encode and decode Five by Five Tap (aka Knock) code.
 import java.util.Scanner;
 public class FiveByFiveTapCodeEncoderDecoder

@@ -1,4 +1,4 @@
-//author: fr37 
+//author: fazlerabbi37
 //the intention behind writing this simple Java program was to generate a random item for a list of given items 
 
 import java.util.Scanner;

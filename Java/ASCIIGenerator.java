@@ -1,4 +1,4 @@
-//author: fr37 
+//author: fazlerabbi37
 //the purpose of this Java program is to do nothing but generate ASCII code for all alphabet (both upper and lower case) and commonly used symbols
 public class ASCIIGenerator
 {

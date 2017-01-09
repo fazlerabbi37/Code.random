@@ -1,4 +1,4 @@
-#author: fr37
+#author: fazlerabbi37
 
 #this script is used to restart the network manager in Linux 
 
