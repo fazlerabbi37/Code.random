@@ -1,23 +1,27 @@
-//doesn't WORK !!!
 //author: fazlerabbi37
 //this is a program that will print a document with normal printer in such a way that they will be able to be bind as book
 //dedicated to S M Nafiur Rahman. The man who can pass his whole life without doing nothing but reading books.
+
 import java.util.Scanner;
 
 public class book_format {
   public static void main(String[] args) {
     Scanner sc = new Scanner(System.in);
     System.out.println("Enter total page");
+
     int page = sc.nextInt();
-    
-    String s=" ";
-    
-     int count=0;
+    String s="";
+    int count=0;
+
+   if(page%4!=0){
+	page=(((page%4)+1)*4);
+    }
+
     for(int counter=2;counter<=page;counter++){
       
       if(count==4){
-      count=0;
-      continue;
+        count=0;
+        continue;
       }
       if(counter==2||counter==3){
         s+=counter+",";
@@ -33,7 +37,7 @@ public class book_format {
         count=count+2;
       }
     }
-    
-    System.out.println(s);
+
+    System.out.println(s.substring(0, (s.length() - 1)));
   }
 }
