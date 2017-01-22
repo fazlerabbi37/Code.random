@@ -33,10 +33,14 @@ mkdir $loc/$dir
 #take variable n with a value 1 that will increase with each screenshot taken 
 n=1
 
+#echo a message
+echo "screenshot_taker is in action. Press Ctrl+c to stop it."
+
 #infinite while loop
 while :
 do
     gnome-screenshot -f $loc/$dir/ss$n.png #take screenshot and save it in location
-    n=$(( n+1 )) 	#increase the value of n
+    echo "Number of screenshot taken: $n" #show screenshot counter
+    n=$(( n+1 ))        #increase the value of n
     sleep $delay_time   #sleep for $delay_time second(s)
 done
