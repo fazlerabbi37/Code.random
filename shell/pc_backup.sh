@@ -49,7 +49,7 @@ read destination
 #make a folder name in the format of dd_mm_yyyy ie. 10_Jan_2017
 u=_ #take a "_" in variable u
 temp="$(date | awk '{print $3}')" #take dd form date command and save it in variable temp
-dir=$dir$temp$u			  #concat dd saved in variable temp with variable dir
+dir=$dir$temp$u			  		  #concat dd saved in variable temp with variable dir
 temp="$(date | awk '{print $2}')" #take mm form date command and save it in variable temp
 dir=$dir$temp$u                   #concat mm saved in variable temp with variable dir
 temp="$(date | awk '{print $6}')" #take yyyy form date command and save it in variable temp

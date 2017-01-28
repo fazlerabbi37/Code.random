@@ -7,8 +7,14 @@
 #the purpose of the script is to backup pendrive data to local drive
 
 #hard code source and destination
-source=/media/fazlerabbi37/01741380059/
-destination=/home/fazlerabbi37/fr37/Backups/PD/s_d_c_b
+echo "Enter the pendrive location:"
+echo "Usually found in /media/(username)/(pendrive_name)/"
+read source
+
+echo "Enter the local drive location:"
+echo "Usually found in /media/(username)/(pendrive_name)/"
+read destination
+
 
 #say and show desktop notifications
 DISPLAY=:0.0 /usr/bin/notify-send "Plugin Pendrive within next 30 seconds for backup"
