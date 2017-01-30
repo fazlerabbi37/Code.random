@@ -12,13 +12,12 @@ echo "Usually found in /media/(username)/(pendrive_name)/"
 read source
 
 echo "Enter the local drive location:"
-echo "Usually found in /media/(username)/(pendrive_name)/"
 read destination
 
 
 #say and show desktop notifications
-DISPLAY=:0.0 /usr/bin/notify-send "Plugin Pendrive within next 30 seconds for backup"
-spd-say "Plugin Pendrive within next 30 seconds for backup"
+DISPLAY=:0.0 /usr/bin/notify-send "Starting backup within next 30 seconds"
+spd-say "Starting backup within next 30 seconds"
 
 #sleep for 10 seconds
 sleep 10
