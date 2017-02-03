@@ -44,12 +44,15 @@ else
     echo -e "\e[31mInvalid entries: type start or wait or stop in the exact same case.\e[0m"
 fi
 
-echo "Enter the locataion where you want to keep the backed up file"
+#echo "Enter the locataion where you want to keep the backed up file"
 read destination
 
 #make a folder name in the format of dd_mm_yyyy ie. 10_Jan_2017
 u=_ #take a "_" in variable u
 temp="$(date | awk '{print $3}')" #take dd form date command and save it in variable temp
+if (( $temp < 10 )); then
+    temp=0$temp
+fi
 dir=$dir$temp$u			  #concat dd saved in variable temp with variable dir
 temp="$(date | awk '{print $2}')" #take mm form date command and save it in variable temp
 dir=$dir$temp$u                   #concat mm saved in variable temp with variable dir
@@ -84,9 +87,9 @@ then
     nano greb_content_list.txt
 else
     printf "#file name: greb_content_list.txt\n#purpose: list all the file(s) and sub-directory(s) of the listed directory(s) and save them in .txt file.\n">>greb_content_list.txt
-    printf "#put one directory in one line\n#format:\n#User added directory(s):\nhome/username/Downloads/\n">>greb_content_list.txt
-	printf "Waraning:AVOID giving line break in between the text \'#User added directory(s):\' and your list of directory(s)\n">>greb_content_list.txt	
-	printf "i.e.:\n#User added directory(s):\n\nhome/username/Downloads\n">>greb_content_list.txt	
+    printf "#put one directory in one line\n#format:\n#User added directory(s):\n#home/username/Downloads/\n">>greb_content_list.txt
+	printf "#Waraning:AVOID giving line break in between the text \'#User added directory(s):\' and your list of directory(s)\n">>greb_content_list.txt	
+	printf "#i.e.:\n#User added directory(s):\n\n#home/username/Downloads\n">>greb_content_list.txt	
 	printf "#Press ctrl+x to finish editing\n">>greb_content_list.txt
     printf "\n\n\t\t\t\t#Edit form here#\n#----------------------------------------------------------------------#\n">>greb_content_list.txt
     printf "\n\n#User added directory(s):\n">>greb_content_list.txt
@@ -121,8 +124,7 @@ linesToSkip=19
 #make a archive with date saved in variable dir
 #options used: -c:create a new archive -z:filter the archive through gzip
 #options used: -v:verbosely list files processed -f:use archive file or device ARCHIVE
-#using GZIP=-9 for better compression rate
-env GZIP=-9 sudo tar -czvf /temp_backup/$dir.tar.gz /temp_backup/$dir
+sudo tar -czvf /temp_backup/$dir.tar.gz /temp_backup/$dir
 
 #move the archive file to a prefered location rather than /temp_location
 sudo mv /temp_backup/$dir.tar.gz $destination 
