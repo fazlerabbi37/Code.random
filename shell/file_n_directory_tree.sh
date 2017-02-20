@@ -14,10 +14,10 @@ read dir #read input and save it in variable dir
 echo "Where you want the output file"
 read out
 
-#name of the directory 
+#name of the directory
 output="$(cd $dir && pwd | grep -o '[^/]*$')"
 
 
 #change directory to location saved on variable dir run ls -LR command on that location
 #put the output on location saved in out variable with the name saved on output
-cd $dir && ls -LR > $out/$output.txt
+cd $dir && ls -ALR > $out/$output.txt
