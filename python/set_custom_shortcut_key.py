@@ -6,29 +6,6 @@
 
 #!/usr/bin/env python3
 
-#setting a castom keyboard shortcut
-#generic
-#    python3 /path/to/script.py '<name>' '<command>' '<key_combination>'
-#gedit
-#    python3 /path/to/script.py 'open gedit' 'gedit' '<Alt>7'
-#mostly used keys
-
-#Super key:                 <Super>
-#Control key:               <Primary> or <Control>
-#Alt key:                   <Alt>
-#Shift key:                 <Shift>
-#numbers:                   1 (just the number)
-#Spacebar:                  space
-#Slash key:                 slash
-#Asterisk key:              asterisk (so it would need `<Shift>` as well)
-#Ampersand key:             ampersand (so it would need <Shift> as well)
-
-#a few numpad keys:
-#Numpad divide key (`/`):   KP_Divide
-#Numpad multiply (Asterisk):KP_Multiply
-#Numpad number key(s):      KP_1
-#Numpad `-`:                KP_Subtract
-
 import subprocess
 import sys
 
