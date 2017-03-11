@@ -1,11 +1,4 @@
-#author: http://askubuntu.com/a/597414/502875 (source)
-
-#set_customshortcut.py
-
-#the purpose of the python script is to set castom keyboard shortcut
-
 #!/usr/bin/env python3
-
 import subprocess
 import sys
 
