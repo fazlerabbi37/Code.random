@@ -10,7 +10,7 @@
 #function instructions show how to set a castom key
 function instructions () {
 	printf "#file name: shortcut_key.txt\n#purpose: set custom shortcut key\n"
-	printf "#Press ctrl+o to save\n#Press ctrl+x to finish editing\n\n"
+	printf "#Press ctrl+o to save.\n#Press ctrl+x to finish editing.\n\n"
 	printf "#------------------------------------------instructions----------------------------------------------#\n\n"
 
 	printf "#READ THIS INSTRUCTION CAREFULLY!!!\n"
@@ -62,7 +62,7 @@ function set_key () {
     } < "shortcut_key.txt"
 }
 
-#check if xdotool is installed
+#check if xdotool is installed; if not ask to press enter to exit
 xdotool=$(which xdotool)
 if [[ ! -z "$xdotool" ]]
 then
@@ -74,7 +74,7 @@ else
     kill $$
 fi
 
-#check if python3 is installed
+#check if python3 is installed; if not ask to press enter to exit
 python=$(which python3)
 if [[ ! -z "$python" ]]
 then
@@ -97,6 +97,8 @@ then
 else
     echo -e "\e[31mpython3 is not installed!!!\e[0m"
     printf "Please install python3 and run the script again.\n"
+    read -p "Press Enter to exit"
+    kill $$
 fi
 
 rm set_custom_shortcut_key.py

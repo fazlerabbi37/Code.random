@@ -1,6 +1,6 @@
 #author: fazlerabbi37
 
-#backup_pc.sh
+#pc_backup.sh
 
 #the purpose of the shell script is to backup my pc
 
