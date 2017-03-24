@@ -27,5 +27,5 @@ for d in $pro/*/
 #take a sub-directory and save it in variable d
 do
     #change drive to the sub-dedicatory saved in variable d and give gop command
-    (cd "$d" && echo $d && git $gop && printf "\n")
+    (cd "$d" && echo $d && git $gop && printf "\n------------------------------------------------------------------------------\n")
 done
