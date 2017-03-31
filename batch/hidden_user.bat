@@ -1,5 +1,7 @@
 ::author: wikihow
 
+::souce: http://tiny.cc/u3d7jy
+
 ::batch script name:  hidden_user.bat
 
 ::the purpose of the batch script is to create a Administrators in Windows
