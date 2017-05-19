@@ -1,6 +1,14 @@
-#https://www.raspberrypi.org/forums/viewtopic.php?f=36&t=96889#
+#author: fazlerabbi37
+
+#source: https://www.raspberrypi.org/forums/viewtopic.php?f=36&t=96889#
+
+#python script name: network_info.py
+
+#the purpose of the python script is to show network information
 
 #!/usr/bin/python3
+
+#imports
 import socket
 import os
 from urllib.request import urlopen
