@@ -14,7 +14,7 @@ read path
 
 #ask and read source path type, save it to var type
 echo "Enter source path type."
-echo "For UNIX type without quote 'u' and for Windows 'w':"
+echo "Enter without quote, for UNIX 'u' and for Windows 'w': "
 read type
 
 #check type for u convert UNXI to Windows, for w convert Windows to UNIX, for all other show error message
