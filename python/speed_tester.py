@@ -21,7 +21,7 @@ file_name = '5MB.zip'
 req = requests.get(url)
 file = open(file_name, 'wb')
 down_time=(time.time() - start_time)
-kbps=(5120/down_time)
+kbps = (5120/down_time)
 print("it took " +str(round(down_time,2))+" seconds to download the file at an average speed of "+str(round(kbps,2))+" kbps")
 
 #show info as notification
