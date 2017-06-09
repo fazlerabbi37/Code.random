@@ -8,8 +8,9 @@
 
 #imports
 import random
+import sys
 
-#defile empty user_given_char_list and password_lenght
+#define empty user_given_char_list and password_lenght
 user_given_char_list = []
 password_lenght = 0
 
@@ -58,7 +59,7 @@ def user_input():
             user_given_char_list.extend(special)
         else:
             print('\033[91m' + "Error!!! input must be in between 1 and 4. Try again" + '\033[0m')
-            return
+            sys.exit()
 
     global password_lenght
     password_lenght = int(input("Password length: "))
