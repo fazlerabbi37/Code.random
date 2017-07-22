@@ -75,3 +75,4 @@ def pass_gen(char_list,pass_length):
 print_char_set()
 user_input()
 print("Password:\n"+ pass_gen(user_given_char_list,password_lenght))
+print("")
