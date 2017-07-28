@@ -44,7 +44,8 @@ def user_input():
     user_given_set_number = input()
     user_given_set_number_list = user_given_set_number.split(" ")
    
-    if user_given_set_number_list[-1] == "":
+     #if user gives space in between numbers
+	if user_given_set_number_list[-1] == "":
         del user_given_set_number_list[-1]
     
     global user_given_char_list
