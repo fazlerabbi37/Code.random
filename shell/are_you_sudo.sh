@@ -2,7 +2,7 @@
 
 #shell script name: are_you_sudo.sh 
 
-#the purpose of the shell script is to check if a user is sudo or not
+#the purpose of the shell script is to check if a user has sudo privilege or not
 
 #!/bin/bash
 
@@ -18,9 +18,9 @@ rm log
 #check if err_log variable is empty or not; will be empty is sudo because file will be created in root directory
 if [[ ! -z $err_log ]]
 then
-	echo "you don't have sudo privilege"
+	echo "You don't have sudo privilege"
 else
-	echo "you have sudo privilege"
+	echo "You have sudo privilege"
 	#remove test.txt form root directory
 	sudo rm /test.txt
 fi
