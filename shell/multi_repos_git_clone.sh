@@ -47,3 +47,5 @@ linesToSkip=14
 	done
 } < git_clone_urls.txt
 
+#remove git_clone_urls.txt file
+rm git_clone_urls.txt
