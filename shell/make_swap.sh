@@ -15,11 +15,20 @@ function make_swap {
 	#active all swap
 	sudo swapon -a
 
+	#save free -g commands output to free file
+	free -g > free
+	
+	#find number of lines in free file and save it in variable last_line
+	last_line="$(wc -l free | awk '{print $1}')"
+	
 	#find RAM size and save it in var ram
-	ram=$(free -g | awk 'FNR == 2 {print $2}')
+	ram="$(head -n 2 free | tail -n 1 | awk '{print $2}')"
 	
 	#find Swap size and save it in var swap
-	swap=$(free -g | awk 'FNR == 3 {print $2}')
+	swap="$(head -n $last_line free | tail -n 1 | awk '{print $2}')"
+
+	#remove free file
+	rm free
 
 	#see if Swap exist and if yes exit script
 	if [ $swap != 0 ]
