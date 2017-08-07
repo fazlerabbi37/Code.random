@@ -28,6 +28,7 @@ function https_to_ssh() {
 	echo $address
 }
 
+#check if the address is SSH or HTTPS and convert it to other format
 if [[ $address == *"git@github.com:"* ]]
 then
 	echo "Converting SSH address to HTTPS address..."
