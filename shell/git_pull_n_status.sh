@@ -29,7 +29,11 @@ if [ "$gop" == "pull" ] || [ "$gop" == "status" ] ; then
     #take a sub-directory and save it in variable d
     do
         #change drive to the sub-dedicatory saved in variable d and give gop command
-        (cd "$d" && echo $d && git $gop && printf "\n------------------------------------------------------------------------------\n")
+        echo ""
+        echo -e "\e[0;34m-----------------------------------------------------------------------------\e[0m"
+        (cd "$d" && echo $d && git $gop)
+        echo -e "\e[0;34m-----------------------------------------------------------------------------\e[0m"
+        echo ""
     done
 else
     echo -e "\e[31mInvalid input!!! Enter either 'pull' or 'status' without quote.\e[0m"
