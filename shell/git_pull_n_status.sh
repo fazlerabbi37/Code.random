@@ -38,7 +38,7 @@ if [ "$gop" == "pull" ] || [ "$gop" == "status" ] ; then
         #change drive to the sub-dedicatory saved in variable d and give gop command
         echo ""
         echo -e "\e[0;34m-----------------------------------------------------------------------------\e[0m"
-        (cd "$d" && echo $d && git $gop)
+        (cd "$d" && echo "repo name: $(basename $d)" && git $gop)
         echo -e "\e[0;34m-----------------------------------------------------------------------------\e[0m"
         echo ""
     done
