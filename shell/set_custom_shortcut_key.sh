@@ -69,7 +69,7 @@ then
     echo -e "\e[32mxdotool is installed.\e[0m"
 else
     echo -e "\e[31mxdotool is not installed!!!\e[0m"
-    echo "open a terminal, type without quote \'sudo apt-get install xdotool\', press enter to install xdotool then run the script again."
+    echo "open a terminal, type without quote 'sudo apt-get install xdotool', press enter to install xdotool then run the script again."
     read -p "Press Enter to exit"
     kill $$
 fi
