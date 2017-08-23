@@ -10,6 +10,22 @@
 #!/bin/bash
 
 
+#check if nmcli is installed if not as to install
+e=$(which nmcli)
+
+if [ -z $e  ]
+then
+    echo "You don't have nmcli installed..."
+    read -p "D you want to install it?[y/n]" cho
+    if [ "$cho" = "y" ]
+    then
+        sudo apt-get install network-manager
+    else
+        echo "exeting script.."
+        kill $$
+    fi
+fi
+
 
 #show  all the available Wi-Fi access points
 nmcli dev wifi
