@@ -84,7 +84,8 @@ function make_swap {
 
 	#echo Swap fileSwap file system info in /etc/fstab
 	echo "Adding Swap fileSwap file system info in /etc/fstab"
-	echo "#swap_tweak" | sudo tee -a /etc/fstab
+	echo "" | sudo tee -a /etc/fstab
+    echo "#swap_tweak" | sudo tee -a /etc/fstab
 	echo "$swap_name    none    swap    sw    0    0" | sudo tee -a /etc/fstab
 	echo "" | sudo tee -a /etc/fstab
 	echo ""
@@ -107,7 +108,8 @@ function make_swap {
 
 	#add swappiness vfs_cache_pressure in /etc/sysctl.conf
 	echo "Adding swappiness and vfs_cache_pressure value in /etc/sysctl.conf"
-	echo "#swap_tweak" | sudo tee -a /etc/sysctl.conf
+	echo "" | sudo tee -a /etc/sysctl.conf
+    echo "#swap_tweak" | sudo tee -a /etc/sysctl.conf
 	echo "vm.swappiness=10" | sudo tee -a /etc/sysctl.conf
 	echo "vm.vfs_cache_pressure = 50" | sudo tee -a /etc/sysctl.conf
 	echo "" | sudo tee -a /etc/sysctl.conf
