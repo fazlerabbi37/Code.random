@@ -17,3 +17,6 @@ read -p "Press Enter to clear history..."
 
 #when Enter is pressed restore the .bash_history_history to .bash_history
 cp $HOME/.bash_history_history $HOME/.bash_history
+
+#remove $HOME/.bash_history_history
+rm $HOME/.bash_history_history
