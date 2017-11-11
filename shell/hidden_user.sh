@@ -2,7 +2,7 @@
 
 #hidden_user.sh
 
-#the purpose of the shell script is to create a hidden user in Gnome based Desktop Environment
+#the purpose of the shell script is to create a hidden user
 
 #!/bin/bash
 
