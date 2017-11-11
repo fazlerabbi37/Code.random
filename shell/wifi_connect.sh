@@ -30,7 +30,9 @@ then
         read -p "D you want to install it?[y/n]" cho
         if [ "$cho" = "y" ]
         then
-            sudo apt-get install network-manager
+            sudo -v
+            echo "Installing nmcli.."
+            sudo apt install network-manager
         else
             echo "exeting script.."
             kill $$
