@@ -20,9 +20,9 @@ remote_server_port=""
 user_input(){
 
     #echo some message
-    echo "Welcome to Local Git Server !!!"
-    echo "We are assuming you have a machine on the LAN which we will call 'remote server' with openssh-server and git enabled."
-    echo "We are also assuming that the 'remote server', your machine is assigned to two seperate static IP and you also have a user created on that remote server"
+    echo -e "\e[33mWelcome to Local Git Server !!!\e[0m"
+    echo -e "\e[33mWe are assuming you have a machine on the LAN which we will call 'remote server' with openssh-server, git-core and sshpass package installed.\e[0m"
+    echo -e "\e[33mWe are also assuming that the 'remote server', your machine is assigned to two seperate static IP and you also have a user created on that remote server\e[0m"
     printf "\n"
 
     #find the current user of the local machine
@@ -38,9 +38,11 @@ user_input(){
     echo "The current user of this machine is: $local_username"
     echo "The IP address of this machine is: $local_ip"
     echo "The SSH port of this machine is: $local_port"
+    printf "\n"
 
 
     read -p "Do you want to stick to the found IP, user name and port?[y/n]: " option
+    printf "\n"
 
     if [[ $option == 'y' ]]
     then
@@ -58,6 +60,7 @@ user_input(){
 
     fi
 
+    printf "\n"
     echo "Enter the user name for the remote server:"
     read remote_server_username
 
@@ -82,13 +85,15 @@ user_input(){
 
 
 
-confiig(){
+config(){
 
+    #local_to_remote
+    echo "SSH Key configuration to access remote server from local machine..."
     #ask user to give the location of .ssh folder
-    echo "Enter the location of .ssh folder [Normally it is in $HOME/.ssh if you haven't changed] :"
-    read ssh_folder
-    pub="$ssh_folder/id_rsa.pub"
-    pri="$ssh_folder/id_rsa"
+    echo "Enter the location of .ssh folder in local machine [Normally it is in $HOME/.ssh if you haven't changed] :"
+    read local_ssh_folder
+    pub="$local_ssh_folder/id_rsa.pub"
+    pri="$local_ssh_folder/id_rsa"
 
     if [ -f "$pub" ] && [ -f "$pri" ]
     then
@@ -97,6 +102,20 @@ confiig(){
 	    ssh-keygen
         ssh-copy-id -i $pri $remote_server_username@$remote_server_ip -p $remote_server_port
     fi
+
+    #remote_to_local
+    echo "SSH Key configuration to access local machine from remote server..."
+
+    read -sp "Enter the remote server password:" remote_server_pass
+
+    #ask user to give the location of .ssh folder
+    echo "Enter the location of .ssh folder in remote server [Normally it is in /home/$remote_server_username/.ssh if you haven't changed]:"
+    read remote_server_ssh_folder
+    remote_server_pub="$remote_server_ssh_folder/id_rsa.pub"
+    remote_server_pri="$remote_server_ssh_folder/id_rsa"
+
+    ssh $remote_server_username@$remote_server_ip -p $remote_server_port "if [ -f "$remote_server_pub" ] && [ -f "$remote_server_pri" ]; then     sshpass -p $remote_server_pass ssh-copy-id -i $remote_server_pri $local_username@$local_ip -p $local_port; else     ssh-keygen;    sshpass -p $remote_server_pass ssh-copy-id -i $remote_server_pri -o StrictHostKeyChecking=no $local_username@$local_ip -p $local_port; fi"
+
 
     ssh $remote_server_username@$remote_server_ip -p $remote_server_port "if [ -d $HOME/local_git_server ]; then     echo \"remote server directory found...\"; else     echo \"remote server directory not found...\";     echo \"creating directory...\";     mkdir $HOME/local_git_server; fi"
 
@@ -111,7 +130,8 @@ read_config(){
          . $HOME/.lgs_conf
     else
         user_input
-        confiig
+        printf "\n"
+        config
     fi
 
 }
@@ -155,5 +175,20 @@ add_repo(){
 
 }
 
-read_config
-add_repo
+#read_config
+#add_repo
+#check if any argument is passed though command line if not ask for it
+if [ $# -lt 1 ]
+then
+    read_config
+    add_repo
+else
+    arg="$1"
+    if [[  $arg == 'd' ]]
+    then
+        rm $HOME/.lgs_conf
+        read_config
+    fi
+fi
+
+
