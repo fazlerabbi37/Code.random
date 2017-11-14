@@ -36,7 +36,7 @@ user_input(){
 
     #show the user name and ip address and ask if they want to use it or not
     echo "The current user of this machine is: $local_username"
-    echo "The IP address of this machine is: $local_ip"
+    echo "The IP address(es) of this machine is: $local_ip"
     echo "The SSH port of this machine is: $local_port"
     printf "\n"
 
