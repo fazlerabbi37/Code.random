@@ -6,7 +6,7 @@
 
 #!/bin/bash
 
-echo "We are asuming thet the songs_list is file that contains all the songs name/title one each in a line and all songs have the .mp3 extention."
+echo -e "\e[33mWe are asuming thet the songs_list is file that contains all the songs name/title one each in a line and all songs have the .mp3 extention.\e[0m"
 
 if [ $# -lt 1 ]
 then
@@ -25,8 +25,10 @@ echo "Video title: '$video_title'"
 file_name="/home/fazlerabbi37/fr37/Projects/ess/songs_list.txt"
 exist=true
 
-IFS=$'\n'
+echo "Checking if song exist in songs_list.txt..."
+echo ""
 
+IFS=$'\n'
 for line in `cat $file_name`
 do
     
@@ -34,8 +36,7 @@ do
     then
         exist=false
     else
-        echo "Song found..."
-        echo "Song name: $line"
+        echo "Song found... Song name: $line"
         exist=true
         break
     fi
@@ -43,8 +44,7 @@ done
 
 if [[ $exist == 'false' ]]
 then
-    echo "Song not found..."
-    echo "Downloading song..."
+    echo "Song not found... Downloading song..."
     youtube-dl -q --extract-audio --audio-format mp3 $youtube_link
     echo "Download fininsed..."
 fi
