@@ -82,38 +82,75 @@ function make_swap {
 	#Turn on Swap using swapon command
 	sudo swapon $swap_name
 
-	#echo Swap fileSwap file system info in /etc/fstab
-	echo "Adding Swap fileSwap file system info in /etc/fstab"
-	echo "" | sudo tee -a /etc/fstab
-    echo "#swap_tweak" | sudo tee -a /etc/fstab
-	echo "$swap_name    none    swap    sw    0    0" | sudo tee -a /etc/fstab
-	echo "" | sudo tee -a /etc/fstab
-	echo ""
+	#echo Swap fileSwap file system info in /etc/fstab if not added before
+    echo "Adding Swap fileSwap file system info in /etc/fstab"
+    if grep -q "#swap_tweak" "/etc/fstab"
+    then
+        echo "'#swap_tweak' line is already in /etc/fstab"
+    else
+        echo "" | sudo tee -a /etc/fstab
+        echo "#swap_tweak" | sudo tee -a /etc/fstab
+    fi
+
+    if grep -q "$swap_name    none    swap    sw    0    0" "/etc/fstab"
+    then
+        echo "'$swap_name    none    swap    sw    0    0' line is already in /etc/fstab" 
+    else
+        echo "$swap_name    none    swap    sw    0    0" | sudo tee -a /etc/fstab
+	    echo "" | sudo tee -a /etc/fstab
+	    echo ""
+    fi
 
 	#check swappiness
-	echo "Current value of swappiness..."
-	cat /proc/sys/vm/swappiness
+	swappiness=$(cat /proc/sys/vm/swappiness)
+    echo "Current value of swappiness is $swappiness"
 	echo ""
 
-	#add swappiness=10
-	sudo sysctl vm.swappiness=10
+
+	if [[ $swappiness != 10 ]]
+    then
+        #add swappiness=10
+        echo "Changing swappiness to 10"
+	    sudo sysctl vm.swappiness=10
+    fi
 
 	#check vfs_cache_pressure
-	echo "Current value of vfs_cache_pressure..."
-	cat /proc/sys/vm/vfs_cache_pressure
+    vfs_cache_pressure=$(cat /proc/sys/vm/vfs_cache_pressure)
+	echo "Current value of vfs_cache_pressure is $vfs_cache_pressure"
 	echo ""
 
-	#add vfs_cache_pressure=50
-	sudo sysctl vm.vfs_cache_pressure=50
+	if [[ $vfs_cache_pressure == 50 ]]
+    then
+        #add vfs_cache_pressure=50
+        echo "Changing vfs_cache_pressure to 50"
+	    sudo sysctl vm.vfs_cache_pressure=50
+    fi
 
 	#add swappiness vfs_cache_pressure in /etc/sysctl.conf
 	echo "Adding swappiness and vfs_cache_pressure value in /etc/sysctl.conf"
-	echo "" | sudo tee -a /etc/sysctl.conf
-    echo "#swap_tweak" | sudo tee -a /etc/sysctl.conf
-	echo "vm.swappiness=10" | sudo tee -a /etc/sysctl.conf
-	echo "vm.vfs_cache_pressure = 50" | sudo tee -a /etc/sysctl.conf
-	echo "" | sudo tee -a /etc/sysctl.conf
-	echo ""
+	
+    if grep -q "#swap_tweak" "/etc/sysctl.conf"
+    then
+        echo "'#swap_tweak' line is already in /etc/sysctl.conf"
+    else
+        echo "" | sudo tee -a /etc/sysctl.conf
+        echo "#swap_tweak" | sudo tee -a /etc/sysctl.conf
+	
+    if grep -q "vm.swappiness=10" "/etc/sysctl.conf"
+    then
+        echo "'vm.swappiness=10' line is already in /etc/sysctl.conf"
+    else
+        echo "vm.swappiness=10" | sudo tee -a /etc/sysctl.conf
+    fi
+	
+    if grep -q "vm.vfs_cache_pressure=50" "/etc/sysctl.conf"
+    then
+        echo "'vm.vfs_cache_pressure=50' line is already in /etc/sysctl.conf"
+    else
+        echo "vm.vfs_cache_pressure = 50" | sudo tee -a /etc/sysctl.conf
+	    echo "" | sudo tee -a /etc/sysctl.conf
+	    echo ""
+    fi
 
 	#reboot system in 60 seconds
 	echo "The system will reboot in 60 seconds..."
