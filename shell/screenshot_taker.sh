@@ -6,6 +6,25 @@
 
 #!/bin/bash
 
+#add checking for import program
+exist=$(which import)
+
+if [[ ! -z $exist ]]
+then
+    echo "import is installed"
+else
+    echo "import is not installed"
+    read -p "Do you want to install import[Y/N]?" install
+    if [[ $instal == "Y" ]]
+    then
+        echo "installing import..."
+        sudo apt-get install imagemagick --fix-missing
+    else
+        echo "Exiting script..."
+        kill $$
+    fi
+fi
+
 
 #time interval on each screenshot
 echo "How much time do you want to wait within each screenshot? (in seconds)"
