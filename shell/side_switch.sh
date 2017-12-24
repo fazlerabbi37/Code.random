@@ -6,11 +6,9 @@
 
 #!/bin/bash
 
-#get the 100% volume and save it in variable limit
-limit=$(amixer -D pulse sget Master | grep "Limits:" | awk '{print $5}')
-
-#devide the limit by 2 and get half_limit
-half_limit=$(( $limit / 2 ))
+#get the current volume for left and right speaker and store it on current_left and current_right for later restore
+current_left=$(amixer -D pulse sget Master | grep "Front Left:" | awk '{print $4}')
+current_right=$(amixer -D pulse sget Master | grep "Front Right:" | awk '{print $4}')
 
 while :
 #infinite loop
@@ -25,18 +23,18 @@ do
     #if option is j then mute left
     elif [[ "$option" == "j" ]]
     then
-        amixer -D pulse sset Master 0,$limit 2>&1 /dev/null
+        amixer -D pulse sset Master 0,$current_right 2>&1 /dev/null
     #if option is l then mute right
     elif [[ "$option" == "l" ]]
     then
-        amixer -D pulse sset Master $limit,0 2>&1 /dev/null
+        amixer -D pulse sset Master $current_left,0 2>&1 /dev/null
     #if option is l then mute both
     elif [[ "$option" == "k" ]]
     then
-        amixer -D pulse sset Master $half_limit,$half_limit 2>&1 /dev/null
-    #if option is l then unmute right
+        amixer -D pulse sset Master 0,0 2>&1 /dev/null
+    #if option is l then unmute both
     elif [[ "$option" == "K" ]]
     then
-        amixer -D pulse sset Master 0,0 2>&1 /dev/null
+        amixer -D pulse sset Master $current_left,$current_right 2>&1 /dev/null
     fi
 done
