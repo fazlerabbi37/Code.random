@@ -37,6 +37,10 @@ make_user(){
 }
 
 print_readme(){
+    
+    #make a Desktop directory 
+    sudo mkdir -p /home/$guest_user_name/Desktop
+
     #create a README.txt asking to change password
     printf "PLEASE READ THIS. IT IS IMPORTANT !!!\n\n" >> /home/$guest_user_name/Desktop/README
 
@@ -98,6 +102,14 @@ else
 	echo "You have sudo privilege"
 	#remove test.txt form root directory
 	sudo rm /test.txt
+
+    #take user input
+    take_input
+
+    #make user, print readme and make delete user script
+    make_user
+    print_readme
+    make_delete_user
 fi
 
 
