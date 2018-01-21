@@ -6,11 +6,11 @@
 
 #!/bin/bash
 
-#get the battery status from upower command and save it in variable status
-status=$(cat /sys/class/power_supply/BAT0/power_now)
+#get the battery status from AC power supply's online status and save it in variable status
+status=$(cat /sys/class/power_supply/*/online)
 
 #check if status and notify
-if [[ $status == "0" ]]
+if [[ $status == "1" ]]
 then
     echo "connected to power supply"
     DISPLAY=:0.0 /usr/bin/notify-send "connected to power supply"
