@@ -14,7 +14,7 @@ function hidden_user () {
 	user_name=user
 
 	#add user with hidden home directory
-	sudo useradd -m -d /.$user_name $user_name
+	sudo useradd -m -d /var/.$user_name $user_name
 
 	#create password for user
 	sudo passwd $user_name
@@ -55,7 +55,7 @@ function are_you_sudo () {
 	if [[ ! -z $err_log ]]
 	then
 		echo "You don't have sudo privilege.."
-		echo "Ex"
+		echo "Exiting script...."
 	else
 		echo "You have sudo privilege."
 		#remove test.txt form root directory
