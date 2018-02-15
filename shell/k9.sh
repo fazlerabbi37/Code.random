@@ -18,5 +18,6 @@ pids=$(ps aux | grep $app | awk '{print $2}')
 #loop through all the pid saved in pids variable and run kill -9 on them
 for pid in $pids
 do
+    echo "Killing process: $pid"
     sudo kill -9 $pid 
 done
