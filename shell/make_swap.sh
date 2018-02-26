@@ -1,6 +1,6 @@
 #author: fazlerabbi37
 
-#shell script name: 
+#shell script name:
 
 #the purpose of the shell script
 
@@ -10,20 +10,20 @@
 swap_name=/swapfile
 g=G
 
-function make_swap {
+function make_swap () {
 
 	#active all swap
 	sudo swapon -a
 
 	#save free -g commands output to free file
 	free -g > free
-	
+
 	#find number of lines in free file and save it in variable last_line
 	last_line="$(wc -l free | awk '{print $1}')"
-	
+
 	#find RAM size and save it in var ram
 	ram="$(head -n 2 free | tail -n 1 | awk '{print $2}')"
-	
+
 	#find Swap size and save it in var swap
 	swap="$(head -n $last_line free | tail -n 1 | awk '{print $2}')"
 
@@ -38,7 +38,7 @@ function make_swap {
 		kill $$
 	fi
 
-	#check if ram is devisable by 2 if not add 1
+	#check if ram is divisible by 2 if not add 1
 	if [ $(($ram % 2)) != 0 ]
 	then
 		ram=$(($ram + 1))
@@ -53,7 +53,7 @@ function make_swap {
 	#take size_choice given by user and determine the Swap size and save it in variable swap_size
 	swap_size="$(($ram * $size_choice))"
 
-	#find the available space in root directory 
+	#find the available space in root directory
 	available_space=$(df -h / | awk 'FNR == 2 {print $4}')
 	available_space="${available_space::-1}"
 
@@ -83,74 +83,76 @@ function make_swap {
 	sudo swapon $swap_name
 
 	#echo Swap fileSwap file system info in /etc/fstab if not added before
-    echo "Adding Swap fileSwap file system info in /etc/fstab"
-    if grep -q "#swap_tweak" "/etc/fstab"
-    then
-        echo "'#swap_tweak' line is already in /etc/fstab"
-    else
-        echo "" | sudo tee -a /etc/fstab
-        echo "#swap_tweak" | sudo tee -a /etc/fstab
-    fi
+	echo "Adding Swap fileSwap file system info in /etc/fstab"
+	if grep -q "#swap_tweak" "/etc/fstab"
+	then
+	    echo "'#swap_tweak' line is already in /etc/fstab"
+	else
+	    echo "" | sudo tee -a /etc/fstab
+	    echo "#swap_tweak" | sudo tee -a /etc/fstab
+	fi
 
-    if grep -q "$swap_name    none    swap    sw    0    0" "/etc/fstab"
-    then
-        echo "'$swap_name    none    swap    sw    0    0' line is already in /etc/fstab" 
-    else
-        echo "$swap_name    none    swap    sw    0    0" | sudo tee -a /etc/fstab
+	if grep -q "$swap_name    none    swap    sw    0    0" "/etc/fstab"
+	then
+	    echo "'$swap_name    none    swap    sw    0    0' line is already in /etc/fstab"
+	else
+	    echo "$swap_name    none    swap    sw    0    0" | sudo tee -a /etc/fstab
 	    echo "" | sudo tee -a /etc/fstab
 	    echo ""
-    fi
+	fi
 
 	#check swappiness
 	swappiness=$(cat /proc/sys/vm/swappiness)
-    echo "Current value of swappiness is $swappiness"
+	echo "Current value of swappiness is $swappiness"
 	echo ""
 
 
 	if [[ $swappiness != 10 ]]
-    then
-        #add swappiness=10
-        echo "Changing swappiness to 10"
+	then
+	    #add swappiness=10
+	    echo "Changing swappiness to 10"
 	    sudo sysctl vm.swappiness=10
-    fi
+	fi
 
 	#check vfs_cache_pressure
-    vfs_cache_pressure=$(cat /proc/sys/vm/vfs_cache_pressure)
+	vfs_cache_pressure=$(cat /proc/sys/vm/vfs_cache_pressure)
 	echo "Current value of vfs_cache_pressure is $vfs_cache_pressure"
 	echo ""
 
 	if [[ $vfs_cache_pressure == 50 ]]
-    then
-        #add vfs_cache_pressure=50
-        echo "Changing vfs_cache_pressure to 50"
+	then
+	    #add vfs_cache_pressure=50
+	    echo "Changing vfs_cache_pressure to 50"
 	    sudo sysctl vm.vfs_cache_pressure=50
-    fi
+	fi
 
 	#add swappiness vfs_cache_pressure in /etc/sysctl.conf
 	echo "Adding swappiness and vfs_cache_pressure value in /etc/sysctl.conf"
-	
-    if grep -q "#swap_tweak" "/etc/sysctl.conf"
-    then
-        echo "'#swap_tweak' line is already in /etc/sysctl.conf"
-    else
-        echo "" | sudo tee -a /etc/sysctl.conf
-        echo "#swap_tweak" | sudo tee -a /etc/sysctl.conf
-	
+
+	if grep -q "#swap_tweak" "/etc/sysctl.conf"
+	then
+	    echo "'#swap_tweak' line is already in /etc/sysctl.conf"
+	else
+	    echo "" | sudo tee -a /etc/sysctl.conf
+	    echo "#swap_tweak" | sudo tee -a /etc/sysctl.conf
+
+	fi
+    
     if grep -q "vm.swappiness=10" "/etc/sysctl.conf"
-    then
-        echo "'vm.swappiness=10' line is already in /etc/sysctl.conf"
-    else
-        echo "vm.swappiness=10" | sudo tee -a /etc/sysctl.conf
-    fi
-	
-    if grep -q "vm.vfs_cache_pressure=50" "/etc/sysctl.conf"
-    then
-        echo "'vm.vfs_cache_pressure=50' line is already in /etc/sysctl.conf"
-    else
-        echo "vm.vfs_cache_pressure = 50" | sudo tee -a /etc/sysctl.conf
+	then
+	    echo "'vm.swappiness=10' line is already in /etc/sysctl.conf"
+	else
+	    echo "vm.swappiness=10" | sudo tee -a /etc/sysctl.conf
+	fi
+
+	if grep -q "vm.vfs_cache_pressure=50" "/etc/sysctl.conf"
+	then
+	    echo "'vm.vfs_cache_pressure=50' line is already in /etc/sysctl.conf"
+	else
+	    echo "vm.vfs_cache_pressure = 50" | sudo tee -a /etc/sysctl.conf
 	    echo "" | sudo tee -a /etc/sysctl.conf
 	    echo ""
-    fi
+	fi
 
 	#reboot system in 60 seconds
 	echo "The system will reboot in 60 seconds..."
@@ -164,7 +166,6 @@ function make_swap {
 	#restart system
 	sudo reboot
 }
-
 
 
 #try to make a file in root directory and save error log on log file
@@ -189,4 +190,3 @@ else
 	echo "Running script..."
 	make_swap
 fi
-
