@@ -49,4 +49,3 @@ then
 else
 	echo -e "\e[31mRemote Control in Transmission is off!!! Please turn it on.\e[0m"
 fi
-
