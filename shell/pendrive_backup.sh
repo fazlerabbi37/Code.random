@@ -6,7 +6,6 @@
 
 #the purpose of the script is to backup pendrive data to local drive
 
-#hard code source and destination
 echo "Enter the pendrive location:"
 echo "Usually found in /media/(username)/(pendrive_name)/"
 read source
