@@ -11,8 +11,8 @@
 touchpad_id=$(xinput list | grep "Touchpad" | awk '{print $6}')
 touchpad_id=$(echo $touchpad_id | cut -d'=' -f2)
 
-#toggles the touchpad
-function touchpad_toggle() { 
+#disable the touchpad
+function disable_touchpad() { 
 	while read -r line
 	do
 		if_mouse_exists=$(lsusb | grep "$line")
@@ -25,9 +25,13 @@ function touchpad_toggle() {
 	done < "/home/$USER/.mouse_name"	
 }
 
+#enable the touchpad
+function enable_touchpad(){
+    xinput set-prop $touchpad_id "Device Enabled" 1
+}
 
 #function detect_mouse detects USB mouse
-function detect_mouse() {
+function add_new_mouse() {
 	echo "Please plug-out your USB mouse and press enter"
 	sleep 5s
 	read -p "Press Enter to continue"
@@ -48,21 +52,25 @@ function detect_mouse() {
 	
 } 
 
+#help function
+function show_help(){
+    echo "touchpad_toggle help menu"
+    echo "touchpad_toggle -h to show this menu"
+    echo "touchpad_toggle -a to add new mouse"
+    echo "touchpad_toggle -e to enable touchpad"
+    echo "touchpad_toggle -d to disable touchpad"
+}
 
-if [ "$1" == "-d" ]
+if [ "$1" == "-h" ] || [ "$#" == 0 ]
 then
-	detect_mouse
-	kill $$
-elif [ "$1" == "-h" ]
+    show_help
+elif [ "$1" == "-a" ]
 then
-	echo "Pass argument -d to detect a USB mouse and -h to show this message"
-	kill $$
-fi
-
-if [ -e "/home/$USER/.mouse_name" ]
+	add_new_mouse
+elif [ "$1" == "-e" ]
 then
-	touchpad_toggle
-else
-	detect_mouse
-	touchpad_toggle
+    enable_touchpad
+elif [ "$1" == "-d" ]
+then
+    disable_touchpad
 fi
