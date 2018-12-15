@@ -84,13 +84,11 @@ fi
 
 
 echo "Enter the source volume location:"
-#read source_volume
-source_volume="/dev/sdb1"
+read source_volume
 echo ""
 
 echo "Enter the destination volume location:"
-#read destination_volume
-destination_volume="/home/fazlerabbi37/fr37/personal/backups/pd/transend"
+read destination_volume
 echo ""
 
 if [[ ! -d $destination_volume ]]
