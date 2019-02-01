@@ -103,5 +103,7 @@ then
 fi
 
 veracrypt_mount
+echo "Sleeping for 10 seconds..."
+sleep 10
 backup
 
