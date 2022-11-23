@@ -1,0 +1,9 @@
+[Unit]
+Description=runs has-public-ip-changed.sh
+
+[Service]
+ExecStart=/home/fazlerabbi37/fr37/projects/personal/Code.random/shell/has-public-ip-changed/has-public-ip-changed.sh
+
+[Install]
+WantedBy=multi-user.target
+
